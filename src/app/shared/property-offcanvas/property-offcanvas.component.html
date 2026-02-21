@@ -1,0 +1,118 @@
+<div class="offcanvas offcanvas-end" [class.show]="isOpen" data-bs-scroll="false" tabindex="-1" id="buyOffcanvas">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold">{{title}}</h5>
+        <button type="button" class="btn-close text-reset" (click)="closeOffcanvas()"></button>
+    </div>
+    <div class="offcanvas-body pb-5">
+        <form class="form_details" [formGroup]="contactForm" (ngSubmit)="saveDetails()">
+            <div class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Property Type*</p>
+                <div class="dropdown">
+                    <button
+                        class="propertyType w-100 d-flex align-items-center justify-content-between btn px-2 py-2 py-lg-8 dropdown-toggle"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{selectedPropertyType}}
+                    </button>
+                    <ul class="w-100 dropdown-menu">
+                        <li><a class="dropdown-item" (click)="setPropertyType('Commercial')">Commercial</a></li>
+                        <li><a class="dropdown-item" (click)="setPropertyType('Residential')">Residential</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Property Title*</p>
+                <input class="px-2 py-2 py-lg-8" name="PropertyTitle" formControlName="PropertyTitle" type="text"
+                    placeholder="Enter Property Title">
+            </div>
+            <div class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Property Price ($)*</p>
+                <input class="px-2 py-2 py-lg-8" name="PropertyPrice" formControlName="PropertyPrice" type="number"
+                    placeholder="Enter Property Price">
+            </div>
+            <div *ngIf="selectedPropertyType === 'Residential'"
+                class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Property Location</p>
+                <input class="px-2 py-2 py-lg-8" name="PropertyLocation" formControlName="PropertyLocation" type="text"
+                    placeholder="Enter Property Location">
+            </div>
+            <div *ngIf="selectedPropertyType === 'Residential'"
+                class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Number of Bedrooms</p>
+                <input class="px-2 py-2 py-lg-8" name="PropertyBedrooms" formControlName="PropertyBedrooms"
+                    type="number" placeholder="Enter Number of Bedrooms">
+            </div>
+            <div *ngIf="selectedPropertyType === 'Residential'"
+                class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Number of Bathrooms</p>
+                <input class="px-2 py-2 py-lg-8" name="PropertyBathrooms" formControlName="PropertyBathrooms"
+                    type="number" placeholder="Enter Number of Bathrooms">
+            </div>
+            <div *ngIf="selectedPropertyType === 'Residential'"
+                class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Area (in sq ft)</p>
+                <input class="px-2 py-2 py-lg-8" name="PropertyArea" formControlName="PropertyArea" type="number"
+                    placeholder="Enter Area (in sq ft)">
+            </div>
+            <div *ngIf="selectedPropertyType === 'Residential'"
+                class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Year Built</p>
+                <input class="px-2 py-2 py-lg-8" name="PropertyYearBuilt" formControlName="PropertyYearBuilt"
+                    type="number" placeholder="Enter Year Built">
+            </div>
+            <div class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Description*</p>
+                <textarea class="px-2 py-2 py-lg-8" name="PropertyDescription" id="PropertyDescription" rows="6"
+                    formControlName="PropertyDescription" placeholder="Property Description"></textarea>
+            </div>
+            <div class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Property Images</p>
+                <input class="px-2 py-2 py-lg-8" (change)="onFileSelected($event)" accept="image/*" type="file"
+                    placeholder="Enter Area (in sq m)">
+            </div>
+            <!-- loader -->
+            <div class="loader-wrapper" *ngIf="isUploading">
+                <div class="loader"></div>
+                <p class="m-0">Uploading...</p>
+            </div>
+            <div class="preview-container">
+                <div *ngFor="let item of selectedImages; let i = index" class="image-preview">
+                    <img class="preview" [src]="gS.imagePath+item" alt="Preview {{ i + 1 }}" />
+                    <img (click)="removeImageByName(item)" class="delete_icon" src="assets/images/delete_icon.svg"
+                        alt="">
+                </div>
+            </div>
+
+            <div class="form_option d-flex flex-column gap-1 align-self-stretch">
+                <p class="m-0 label">Property Documents</p>
+                <input class="px-2 py-2 py-lg-8" (change)="onFileSelectedDocuments($event)" accept=".pdf" type="file"
+                    placeholder="Enter Area (in sq m)">
+            </div>
+            <!-- loader -->
+            <div class="loader-wrapper" *ngIf="isUploadingDocs">
+                <div class="loader"></div>
+                <p class="m-0">Uploading...</p>
+            </div>
+            <div class="preview-container">
+                <div *ngFor="let item of selectedDocs; let i = index" class="docs-preview">
+                    <p class="m-0">{{item}}</p>
+                    <div class="delete_icon d-flex align-items-center gap-2">
+                        <a href="javascript:void(0)" (click)="viewDocument(gS.imagePath+item)">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                        <img (click)="removeDocByName(item)" class="" src="assets/images/delete_icon.svg"
+                            alt="">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="btn_div">
+                <button [disabled]="contactForm.invalid" [ngClass]="{
+                    'disabled_btn':contactForm.invalid
+                }">{{isEdit?'Update Property':'Add Property'}}</button>
+                <button class="disabled_btn" type="button" (click)="closeOffcanvas()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="offcanvas-backdrop fade show"></div>

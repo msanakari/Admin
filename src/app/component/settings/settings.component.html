@@ -1,0 +1,64 @@
+<div class="app-content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="mb-0">Settings</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="app-content">
+    <div class="container-fluid">
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="lottie_player  d-flex flex-column align-items-center justify-content-center" *ngIf="pageData.length == 0 && isPageLoading">
+                        <lottie-player src="assets/lottie/loading.json" background="transparent" speed="0.5"
+                            style="width: 300px; height: 300px;" loop autoplay>
+                        </lottie-player>
+                    </div>
+                    <div class="card" *ngIf="pageData.length > 0">
+                        <!-- /.card-header -->
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="datatable" class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="max-width: 65px; width: 65px;">S.No.</th>
+                                            <th>Name</th>
+                                            <th>value</th>
+                                            <th>Creation Date</th>
+                                            <th style="max-width: 65px; width: 65px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of pageData ; let i = index">
+                                            <td class="text-center">{{ i + 1 }}.</td>
+                                            <td>{{item?.name ?item?.name:'N/A'}}</td>
+                                            <td>$ {{item?.value?(item?.value | number:'1.0-0'):'N/A'}}</td>
+                                            <td> {{item?.craeted_at | date:'dd/MM/YYYY, hh:mm a'}}</td>
+                                            <td class="text-center">
+                                                <a href="javascript:void(0)" (click)="viewSetting(item)">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="lottie_player d-flex flex-column align-items-center justify-content-center gap-4" *ngIf="pageData.length == 0 && !isPageLoading">
+                        <lottie-player src="assets/lottie/no_data.json" background="transparent" speed="0.5"
+                            style="width: 300px; height: 300px;" count="2" autoplay>
+                        </lottie-player>
+                        <p class="m-0 fs-5 fw-bold">No Data Found</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<app-setting-offcanvas *ngIf="viewSettingPopup" [settingData]="selectedItem" (close)="closeOffcanvas($event)" (handleUpdate)="handleUpdate($event)"></app-setting-offcanvas>

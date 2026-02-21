@@ -1,0 +1,77 @@
+<div class="offcanvas offcanvas-end" [class.show]="isOpen" data-bs-scroll="false" tabindex="-1" id="buyOffcanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title fw-bold">{{title}}</h5>
+    <button type="button" class="btn-close text-reset" (click)="closeOffcanvas()"></button>
+  </div>
+  <div class="offcanvas-body" *ngIf="agentData">
+    <div class="form_details d-flex flex-column gap-3">
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.firstName">
+        <p class="m-0 fw-bold">Name</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.firstName}} {{agentData?.lastName}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.agentId">
+        <p class="m-0 fw-bold">Agent Id</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.agentId}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.brokerageCompany">
+        <p class="m-0 fw-bold">Brokerage Company</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.brokerageCompany}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.email">
+        <p class="m-0 fw-bold">Email</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.email}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.phoneNumber">
+        <p class="m-0 fw-bold">phone Number</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.countryCode}} {{agentData?.phoneNumber}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.experience">
+        <p class="m-0 fw-bold">Experience</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.experience}} years</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.states">
+        <p class="m-0 fw-bold">States</p>
+        <div class="select_box px-2 py-2 d-flex gap-2 align-items-center flex-wrap">
+          <p class="m-0" *ngFor="let state of agentData?.states">{{state}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.propertyType">
+        <p class="m-0 fw-bold">Type of Property</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.propertyType}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.prefrenceType">
+        <p class="m-0 fw-bold">Prefrence Type</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.prefrenceType}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.agentCommission">
+        <p class="m-0 fw-bold">Agent Commission</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.agentCommission}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="agentData?.cashbackBuyer">
+        <p class="m-0 fw-bold">Cashback to Buyer</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{agentData?.cashbackBuyer}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="offcanvas-backdrop fade show"></div>

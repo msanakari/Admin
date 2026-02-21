@@ -1,0 +1,25 @@
+<div id="viewProposal" class="modal-wrapper-design">
+    <div class="employer-box">
+        <div
+            class="archived_modal d-flex flex-column align-items-start justify-content-start px-24 pb-36 pt-36 p-lg-36 gap-5 gap-lg-5">
+            <div class="close_btn_div">
+                <button type="button" class="new_close_btn p-0" (click)="close()">
+                    <img src="assets/modal_close.svg">
+                </button>
+            </div>
+            <div class="modal_title align-self-stretch d-flex flex-column gap-3 gap-lg-4 align-items-center">
+                <img src="assets/delete.svg">
+                <div class="d-flex flex-column gap-1 align-items-center">
+                    <p class="m-0 modal_title_text text-center">Are you sure you want to delete?</p>
+                    <p class="m-0 modal_title_subtext">This action cannot be undone.</p>
+                </div>
+            </div>
+
+            <div class="modal_btn d-flex gap-3 align-self-stretch justify-content-center">
+                <button (click)="close()">Cancel</button>
+                <button class="delete_btn" (click)="deleteConfirm()">Delete</button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="offcanvas offcanvas-end" [class.show]="isOpen" data-bs-scroll="false" tabindex="-1" id="buyOffcanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title fw-bold">{{title}}</h5>
+    <button type="button" class="btn-close text-reset" (click)="closeOffcanvas()"></button>
+  </div>
+  <div class="offcanvas-body" *ngIf="inqueryData">
+    <div class="form_details d-flex flex-column gap-3">
+      <p class="title mt-3 fs-5 fw-bold">Sell Details</p>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.sellState">
+        <p class="m-0 fw-bold">State</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.sellState}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.sellPropertyType">
+        <p class="m-0 fw-bold">Property Category</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.sellPropertyType}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.sellPropertySubType">
+        <p class="m-0 fw-bold">Property Type</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.sellPropertySubType}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.sellPriceRange">
+        <p class="m-0 fw-bold">Price Range</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.sellPriceRange}}</p>
+        </div>
+      </div>
+       <p class="title mt-3 fs-5 fw-bold">Buy Details</p>
+       <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.buyState">
+        <p class="m-0 fw-bold">State</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.buyState}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.buyPropertyType">
+        <p class="m-0 fw-bold">Property Category</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.buyPropertyType}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.buyPropertySubType">
+        <p class="m-0 fw-bold">Property Type</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.buyPropertySubType}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.buyPriceRange">
+        <p class="m-0 fw-bold">Price Range</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.buyPriceRange}}</p>
+        </div>
+      </div>
+      <p class="title mt-3 fs-5 fw-bold">Contact Details</p>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.first_name">
+        <p class="m-0 fw-bold">First Name</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.first_name}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.last_name">
+        <p class="m-0 fw-bold">Last Name</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.last_name}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.email">
+        <p class="m-0 fw-bold">Email</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.email}}</p>
+        </div>
+      </div>
+      <div class="form_field d-flex gap-1 flex-column" *ngIf="inqueryData?.phone_number">
+        <p class="m-0 fw-bold">Phone Number</p>
+        <div class="input_box px-3 py-2">
+          <p class="m-0">{{inqueryData?.country_code}} {{inqueryData?.phone_number}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="offcanvas-backdrop fade show"></div>

@@ -1,0 +1,171 @@
+.page-wrapper {
+    .auth-bg {
+        // background: url(/assets/images/loginbg.jpg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 50px 100px;
+
+        .authentication-box {
+            width: 460px;
+            z-index: 2;
+            margin: 0 auto;
+
+            .brand-logo {
+                text-align: center !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 16px;
+
+                img {
+                    width: 130px;
+                    height: 60px;
+                }
+
+                p {
+                    margin: 0px;
+                    font-size: 34px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    letter-spacing: 1.35px;
+                    background: linear-gradient(270deg, #0153FF 0.13%, #55ACEE 99.87%);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+            }
+
+            .text-center {
+                text-align: center !important;
+
+                img {}
+            }
+
+            .card {
+                margin-bottom: 30px;
+                border: 0px;
+                transition: all .3s ease;
+                letter-spacing: .5px;
+                border-radius: 8px;
+                box-shadow: 1px 5px 24px #4466f20d;
+
+                .card-body {
+                    padding: 30px;
+                    background-color: transparent;
+
+                    .text-center {
+                        text-align: center !important;
+
+                        h4 {
+                            color: #313131;
+                            font-weight: 600;
+                            letter-spacing: 1px;
+                        }
+
+                        h6 {
+                            color: #777;
+                            letter-spacing: 1px;
+                            font-size: 14px;
+                        }
+                    }
+
+                    .theme-form {
+                        padding-top: 20px;
+
+                        .form-group {
+                            margin-bottom: 20px;
+
+                            .col-form-label {
+                                color: #999;
+                                font-size: 14px;
+                                line-height: 1.5;
+                                font-family: work-Sans, sans-serif;
+                            }
+
+                            .form-control {
+                                display: block;
+                                width: 100%;
+                                padding: .375rem .75rem;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                line-height: 1.5;
+                                color: var(--bs-body-color);
+                                appearance: none;
+                                background-color: var(--bs-body-bg);
+                                background-clip: padding-box;
+                                border: var(--bs-border-width) solid var(--bs-border-color);
+                                border-radius: var(--bs-border-radius);
+                                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                            }
+                        }
+                    }
+
+                    .checkbox {
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+
+                        input {
+                            cursor: pointer;
+                            width: 14px;
+                            height: 14px;
+                        }
+
+                        label {
+                            cursor: pointer;
+                            font-size: 12px;
+                            color: black;
+                        }
+                    }
+
+                    .login-divider {
+                        position: relative;
+                        clear: both;
+                        height: 0;
+                        margin: 30px 0;
+                        border-top: 1px solid #eff0f1;
+                        font-family: work-Sans, sans-serif;
+                        font-size: 14px;
+
+                    }
+
+                    .theme-form .login-divider:before {
+                        position: absolute;
+                        top: -11px;
+                        left: 40%;
+                        margin-left: -10px;
+                        padding: 0 5px;
+                        color: #1b252a;
+                        background: #fff;
+                        content: "Or Login With";
+                    }
+
+                    .social {
+                        .btn-showcase {
+                            display: flex;
+                            justify-content: center;
+                            gap: 15px;
+
+                            img {
+                                width: 20px;
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:769px) {
+    .page-wrapper {
+        .auth-bg {
+            padding: 50px 24px;
+        }
+    }
+}

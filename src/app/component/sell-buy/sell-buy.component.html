@@ -1,0 +1,95 @@
+<div class="app-content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="mb-0">Sell&Buy</h3>
+            </div>
+            <div class="col-sm-6 d-flex justify-content-end gap-3">
+                <select class="form-select" style="width: auto;" [(ngModel)]="filterType" (change)="filterChange()">
+                    <option *ngFor="let item of filterOptionNew" [value]="item">{{ item}}</option>
+                </select>
+                <button  *ngIf="pageData.length > 0" (click)="downloadExcel()" class="mb-0 bg-primary rounded-2 border-0 text-white px-3">Download Excel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="app-content">
+    <div class="container-fluid">
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="lottie_player  d-flex flex-column align-items-center justify-content-center"
+                        *ngIf="pageData.length == 0 && isPageLoading">
+                        <lottie-player src="assets/lottie/loading.json" background="transparent" speed="0.5"
+                            style="width: 300px; height: 300px;" loop autoplay>
+                        </lottie-player>
+                    </div>
+                    <div class="card" *ngIf="pageData.length > 0">
+                        <!-- /.card-header -->
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="datatable" class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="max-width: 65px; width: 65px;">S.No.</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Created Date</th>
+                                             <th style="max-width: 65px; width: 65px;">Status</th>
+                                            <th style="max-width: 65px; width: 65px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of pageData ; let i = index">
+                                            <td class="text-center">{{ i + 1 }}.</td>
+                                            <td>{{(item?.first_name && item?.last_name)?(item?.first_name + '
+                                                '+item?.last_name):'N/A'}}</td>
+                                            <td>{{item?.email?item?.email:'N/A'}}</td>
+                                            <td>{{item?.country_code}} {{item?.phone_number}}</td>
+                                            <td> {{item?.created_at | date:'MM/dd/YYYY, hh:mm a'}}</td>
+                                            <td>
+                                                <label class="switch">
+                                                    <input type="checkbox"
+                                                    [checked]="item?.status=='Open'"
+                                                    (change)="onToggleChange($event, item)" />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="javascript:void(0)" (click)="openInquery(item)">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="ms-2" (click)="deleteEntry(item)">
+                                                    <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <mat-paginator [length]="totalPages" [pageSize]="10" [pageSizeOptions]="[10, 25, 100]"
+                                aria-label="Select page" (page)="onPageChange($event)">
+                            </mat-paginator>
+
+                        </div>
+                    </div>
+                    <div class="lottie_player d-flex flex-column align-items-center justify-content-center gap-4"
+                        *ngIf="pageData.length == 0 && !isPageLoading">
+                        <lottie-player src="assets/lottie/no_data.json" background="transparent" speed="0.5"
+                            style="width: 300px; height: 300px;" count="2" autoplay>
+                        </lottie-player>
+                        <p class="m-0 fs-5 fw-bold">No Data Found</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<app-buy-sell-offcanvas *ngIf="viewInquiry" [inqueryData]="selectedItem"
+    (close)="closeOffcanvas($event)"></app-buy-sell-offcanvas>
+
+<app-delete-popup *ngIf="isDeletPopup" type="BUYSELL" [item]="deleteData" (onClose)="closeModal($event)"
+    (onSuccess)="deleteSuccessClose($event)"></app-delete-popup>
